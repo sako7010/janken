@@ -12,59 +12,69 @@ def janken
     
   if player_hand == enemy_hand
     puts "あいこです"
+    janken
     return true
-        
+
   elsif (player_hand == 0 && enemy_hand == 1) || (player_hand == 1 && enemy_hand == 2) || (player_hand == 2 && enemy_hand == 0)      
     puts "あなたの勝ちです"
     @result = "win"
-    return false 
-  
+    attimuite
+    return false
+
   else 
     puts "あなたの負けです"
     @result = "lose"
+    attimuite
     return false
   end
 end
-  next_game = true
-
-while next_game do
-next_game = janken 
-end
 
 #あっちむいてほい
+def attimuite
+  if @result == "win"
+    puts "あっち向いて〜"
+    puts "0(上)１(右)２(下)3(左)"
+    player_face = gets.to_i
+    enemy_face = rand(4)
+    directions = ["上","右","下","左"]
+    puts "ホイ！"
+    puts "_____________________________________"
+    puts "あなた：#{directions[player_face]} 相手：#{directions[enemy_face]}"
 
-if @result == "win"
-  puts "あっち向いて〜"
-  puts "0(上)１(右)２(下)3(左)"
-  player_face = gets.to_i
-  enemy_face = rand(4)
-  directions = ["上","右","下","左"]
-  puts "ホイ！"
-  puts "_____________________________________"
-  puts "あなた：#{directions[player_face]} 相手：#{directions[enemy_face]}"
+    if player_face == enemy_face
+      puts "あなたの勝ちです"
+      return false
 
-  if player_face == enemy_face
-    puts "あなたの勝ちです"
-  elsif 
-    puts "引き分けです"
-    @result = "draw"
+    else
+      puts "引き分けです"
+      janken
+      return true
+    end
+  end
+
+  if @result == "lose"
+    puts "あっち向いて〜"
+    puts "0(上)１(右)２(下)3(左)"
+    player_face = gets.to_i
+    enemy_face = rand(4)
+    directions = ["上","右","下","左"]
+    puts "ホイ"
+    puts "_____________________________________"
+    puts "あなた：#{directions[player_face]} 相手：#{directions[enemy_face]}"
+
+    if player_face == enemy_face
+      puts "あなたの負けです"
+      return false
+      
+    else
+      puts "引き分けです" 
+      janken
+      return true
+    end
   end
 end
 
-if @result == "lose"
-  puts "あっち向いて〜"
-  puts "0(上)１(右)２(下)3(左)"
-  player_face = gets.to_i
-  enemy_face = rand(4)
-  directions = ["上","右","下","左"]
-  puts "ホイ"
-  puts "_____________________________________"
-  puts "あなた：#{directions[player_face]} 相手：#{directions[enemy_face]}"
-
-  if player_face == enemy_face
-    puts "あなたの負けです"
-  elsif
-    puts "引き分けです" 
-    @result = "draw"
-  end
+next_game = true
+while next_game do
+next_game = janken 
 end
